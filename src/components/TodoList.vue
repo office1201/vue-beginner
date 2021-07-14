@@ -1,7 +1,5 @@
 <template>
-  <ul>
-    list
-  </ul>
+  <ul></ul>
 </template>
 
 <script>

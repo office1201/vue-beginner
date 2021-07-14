@@ -1,5 +1,5 @@
 <template>
-  <form action="">input</form>
+  <form action=""></form>
 </template>
 
 <script>

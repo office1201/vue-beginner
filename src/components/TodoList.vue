@@ -30,11 +30,8 @@ export default {
     removeTodo: function (todoItem, index) {
       this.$emit("removeItem", todoItem, index);
     },
-    toogleComplete: function (todoItem) {
-      todoItem.completed = !todoItem.completed;
-      // 로컬스토리지에 update API가 없기 때문에, 지웠다가 갱신하는😭😭😭😭😭
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem, JSON.stringify(todoItem));
+    toogleComplete: function (todoItem, index) {
+      this.$emit("toogleItem", todoItem, index);
     },
   },
 };

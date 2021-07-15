@@ -4,7 +4,11 @@
     <!-- v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트의 메서드 명" -->
     <TodoHeader />
     <TodoInput v-on:addTodoItem="addOneItem" />
-    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem" />
+    <TodoList
+      v-bind:propsdata="todoItems"
+      v-on:removeItem="removeOneItem"
+      v-on:toogleItem="toogleOneItem"
+    />
     <TodoFooter />
   </div>
 </template>
@@ -30,6 +34,12 @@ export default {
     removeOneItem: function (todoItem, index) {
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1); // JS 배열 메서드, 특정 index 하나 지움, 반대로 slice: 똑같이 지움, 기존 배열을 변경x, 새로운 배열 반환
+    },
+    toogleOneItem: function (todoItem, index) {
+      this.todoItems[index].completed = !this.todoItems[index].completed;
+      // 로컬스토리지에 update API가 없기 때문에, 지웠다가 갱신하는😭😭😭😭😭
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem, JSON.stringify(todoItem));
     },
   },
   created: function () {

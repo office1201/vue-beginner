@@ -17,8 +17,11 @@ export default {
   methods: {
     addTodo: function (e) {
       e.preventDefault();
-      localStorage.setItem(this.newTodoItem, this.newTodoItem);
-      this.clearInput();
+      if (this.newTodoItem !== "") {
+        let obj = { completed: false, item: this.newTodoItem };
+        localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); // localStorage.setItem(this.newTodoItem, this.newTodoItem)에서 수정됨
+        this.clearInput();
+      }
     },
     clearInput: function () {
       this.newTodoItem = "";

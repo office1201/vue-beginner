@@ -8,12 +8,16 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="fas fa-plus addBtn"></i>
     </span>
+    <!-- 모달창 적용 -->
     <modal v-if="showModal" @close="showModal = false">
-      <!--
-      you can use custom content here to overwrite
-      default content
-    -->
-      <h3 slot="header">custom header</h3>
+      <h3 slot="header">
+        경고!
+        <i
+          class="fas fa-times closeModalBtn"
+          v-on:click="showModal = false"
+        ></i>
+      </h3>
+      <div slot="body">아무것도 입력하지 않으셨습니다.</div>
     </modal>
   </form>
 </template>
@@ -36,7 +40,7 @@ export default {
         this.$emit("addTodoItem", this.newTodoItem);
         this.clearInput();
       } else {
-        console.log(1);
+        this.showModal = !this.showModal;
       }
     },
     clearInput: function () {
@@ -73,5 +77,8 @@ input:focus {
 .addBtn {
   color: white;
   vertical-align: middle;
+}
+.closeModalBtn {
+  color: #42b983;
 }
 </style>

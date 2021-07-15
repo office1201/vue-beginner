@@ -3,21 +3,13 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
+          <!-- M-Header -->
           <div class="modal-header">
             <slot name="header"> default header </slot>
           </div>
-
+          <!-- M-Body -->
           <div class="modal-body">
             <slot name="body"> default body </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
-            </slot>
           </div>
         </div>
       </div>
@@ -25,7 +17,7 @@
   </transition>
 </template>
 
-<style scoped>
+<style>
 .modal-mask {
   position: fixed;
   z-index: 9998;

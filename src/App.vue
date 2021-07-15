@@ -20,33 +20,34 @@ import TodoList from "./components/TodoList.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 
 export default {
-  data: function () {
+  // 리팩토링: 향상된 리터럴 - data: function() {}에서 수정됨
+  data() {
     return {
       todoItems: [],
     };
   },
   methods: {
-    addOneItem: function (todoItem) {
+    addOneItem(todoItem) {
       const obj = { completed: false, item: todoItem };
       localStorage.setItem(todoItem, JSON.stringify(obj)); // localStorage.setItem(this.newTodoItem, this.newTodoItem)에서 수정됨
       this.todoItems.push(obj);
     },
-    removeOneItem: function (todoItem, index) {
+    removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1); // JS 배열 메서드, 특정 index 하나 지움, 반대로 slice: 똑같이 지움, 기존 배열을 변경x, 새로운 배열 반환
     },
-    toogleOneItem: function (todoItem, index) {
+    toogleOneItem(todoItem, index) {
       this.todoItems[index].completed = !this.todoItems[index].completed;
       // 로컬스토리지에 update API가 없기 때문에, 지웠다가 갱신하는😭😭😭😭😭
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem, JSON.stringify(todoItem));
     },
-    clearAllItems: function () {
+    clearAllItems() {
       localStorage.clear();
       this.todoItems = [];
     },
   },
-  created: function () {
+  created() {
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i) !== "loglevel:webpack-dev-server")

@@ -26,14 +26,14 @@
 import Modal from "./common/Modal.vue";
 
 export default {
-  data: function () {
+  data() {
     return {
       newTodoItem: "",
       showModal: false,
     };
   },
   methods: {
-    addTodo: function (e) {
+    addTodo(e) {
       e.preventDefault();
       if (this.newTodoItem !== "") {
         // this.$emit("이벤트 이름", 인자1, 인자2, ...)
@@ -43,7 +43,7 @@ export default {
         this.showModal = !this.showModal;
       }
     },
-    clearInput: function () {
+    clearInput() {
       this.newTodoItem = "";
     },
   },

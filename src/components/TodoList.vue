@@ -1,8 +1,13 @@
 <template>
   <ul>
-    <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow">
+    <!-- v-for에서 제공하는 내장 index -->
+    <li
+      v-for="(todoItem, index) in todoItems"
+      v-bind:key="todoItem"
+      class="shadow"
+    >
       {{ todoItem }}
-      <span class="removeBtn" v-on:click="removeTodo">
+      <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
         <i class="fas fa-trash-alt"></i>
       </span>
     </li>
@@ -17,8 +22,10 @@ export default {
     };
   },
   methods: {
-    removeTodo: function () {
-      console.log(1);
+    removeTodo: function (todoItem, index) {
+      console.log(todoItem, index);
+      localStorage.removeItem(todoItem);
+      this.todoItems.splice(index, 1); // JS 배열 메서드, 특정 index 하나 지움, 반대로 slice: 똑같이 지움, 기존 배열을 변경x, 새로운 배열 반환
     },
   },
   created: function () {

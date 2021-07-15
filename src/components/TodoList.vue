@@ -2,7 +2,7 @@
   <ul>
     <!-- v-for에서 제공하는 내장기능1: ('', index⭐️) -->
     <li
-      v-for="(todoItem, index) in todoItems"
+      v-for="(todoItem, index) in propsdata"
       v-bind:key="todoItem.item"
       class="shadow"
     >
@@ -24,11 +24,7 @@
 
 <script>
 export default {
-  data: function () {
-    return {
-      todoItems: [],
-    };
-  },
+  props: ["propsdata"],
   methods: {
     removeTodo: function (todoItem, index) {
       localStorage.removeItem(todoItem);
@@ -40,17 +36,6 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem, JSON.stringify(todoItem));
     },
-  },
-
-  created: function () {
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server")
-          this.todoItems.push(
-            JSON.parse(localStorage.getItem(localStorage.key(i))) // this.todoItems.push(localStorage.key(i))에서 수정됨
-          );
-      }
-    }
   },
 };
 </script>

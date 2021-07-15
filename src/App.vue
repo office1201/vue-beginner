@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     addOneItem: function (todoItem) {
-      let obj = { completed: false, item: todoItem };
+      const obj = { completed: false, item: todoItem };
       localStorage.setItem(todoItem, JSON.stringify(obj)); // localStorage.setItem(this.newTodoItem, this.newTodoItem)에서 수정됨
       this.todoItems.push(obj);
     },

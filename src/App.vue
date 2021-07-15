@@ -19,6 +19,7 @@ import TodoInput from "./components/TodoInput.vue";
 import TodoList from "./components/TodoList.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 
+// export default에서 default는 하나의 파일에서 하나만 "export"하게 즉, 인캡슐레이션 하는 것...!
 export default {
   // 리팩토링: 향상된 객체 리터럴 - data: function() {}에서 수정됨
   data() {

@@ -20,7 +20,7 @@ import TodoList from "./components/TodoList.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 
 export default {
-  // 리팩토링: 향상된 리터럴 - data: function() {}에서 수정됨
+  // 리팩토링: 향상된 객체 리터럴 - data: function() {}에서 수정됨
   data() {
     return {
       todoItems: [],
@@ -59,6 +59,7 @@ export default {
   },
   name: "App",
   components: {
+    // 향상된 객체 리터럴
     TodoHeader,
     TodoInput,
     TodoList,

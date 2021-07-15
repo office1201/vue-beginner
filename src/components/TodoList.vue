@@ -10,11 +10,12 @@
         class="fas fa-check checkBtn"
         v-bind:class="{ textCompleted: todoItem.completed }"
         v-on:click="toogleComplete(todoItem, index)"
-      ></i>
+      >
+      </i>
       <!-- v-bind:class에서 제공하는 강력한 내장기능2: { 참-실행됨: boolean } -->
-      <span v-bind:class="{ textCompleted: todoItem.completed }">{{
-        todoItem.item
-      }}</span>
+      <span v-bind:class="{ textCompleted: todoItem.completed }">
+        {{ todoItem.item }}</span
+      >
       <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
         <i class="fas fa-trash-alt"></i>
       </span>
@@ -27,8 +28,7 @@ export default {
   props: ["propsdata"],
   methods: {
     removeTodo: function (todoItem, index) {
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1); // JS 배열 메서드, 특정 index 하나 지움, 반대로 slice: 똑같이 지움, 기존 배열을 변경x, 새로운 배열 반환
+      this.$emit("removeItem", todoItem, index);
     },
     toogleComplete: function (todoItem) {
       todoItem.completed = !todoItem.completed;

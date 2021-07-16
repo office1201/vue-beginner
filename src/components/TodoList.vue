@@ -9,14 +9,14 @@
       <i
         class="fas fa-check checkBtn"
         v-bind:class="{ textCompleted: todoItem.completed }"
-        v-on:click="toogleComplete(todoItem, index)"
+        v-on:click="toogleComplete({ todoItem, index })"
       >
       </i>
       <!-- v-bind:class에서 제공하는 강력한 내장기능2: { 참-실행됨: boolean } -->
       <span v-bind:class="{ textCompleted: todoItem.completed }">
         {{ todoItem.item }}</span
       >
-      <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+      <span class="removeBtn" v-on:click="removeTodo({ todoItem, index })">
         <i class="fas fa-trash-alt"></i>
       </span>
     </li>
@@ -24,20 +24,24 @@
 </template>
 
 <script>
-// mapGetters 써보기
-import { mapGetters } from "vuex";
+// mapGetters 써보기, mapMutations 써보기
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      // this.$emit("removeItem", todoItem, index);
-      // ⭐️인자를 3개 이상 넘겨주면 불편하기 때문에 객체화를 시키고 거기다가 향상된 객체 리터럴 문법을 활용해서 인자로 넘겨줌 ==> const obj = {todoItem, index}를 그냥 인자로 넘겨줄 때에는 {todoItem, index}로!
-      this.$store.commit("removeOneItem", { todoItem, index });
-    },
-    toogleComplete(todoItem, index) {
-      // this.$emit("toogleItem", todoItem, index);
-      this.$store.commit("toogleOneItem", { todoItem, index });
-    },
+    ...mapMutations({
+      removeTodo: "removeOneItem", // removeTodo: 'removeOneItem(todoItem, index)'와 동일, 다만 위 태그에서 전달하는 인자 수를 아래와 맞추기 위에서 위쪽에 인자를 객체 디스트럭쳐링 처리해 줌.({todoItem, index})
+      toogleComplete: "toogleOneItem",
+    }),
+    // removeTodo(todoItem, index) {
+    //   // this.$emit("removeItem", todoItem, index);
+    //   // ⭐️인자를 3개 이상 넘겨주면 불편하기 때문에 객체화를 시키고 거기다가 향상된 객체 리터럴 문법을 활용해서 인자로 넘겨줌 ==> const obj = {todoItem, index}를 그냥 인자로 넘겨줄 때에는 {todoItem, index}로!
+    //   this.$store.commit("removeOneItem", { todoItem, index });
+    // },
+    // toogleComplete(todoItem, index) {
+    //   // this.$emit("toogleItem", todoItem, index);
+    //   this.$store.commit("toogleOneItem", { todoItem, index });
+    // },
   },
   computed: {
     // todoItems() {

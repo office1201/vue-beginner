@@ -24,6 +24,12 @@ export const store = new Vuex.Store({
   state: {
     todoItems: storage.fetch(),
   },
+  // getters로 TodoList 컴포넌트에 v-for="(todoItem, index) in this.$store.state.todoItems" 바꿔보기
+  getters: {
+    storedTodoItems(state) {
+      return state.todoItems;
+    },
+  },
   mutations: {
     addOneItem(state, todoItem) {
       const obj = { completed: false, item: todoItem };

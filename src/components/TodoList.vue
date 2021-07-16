@@ -2,7 +2,7 @@
   <transition-group name="list" tag="ul">
     <!-- v-for에서 제공하는 내장기능1: ('', index⭐️) -->
     <li
-      v-for="(todoItem, index) in this.$store.state.todoItems"
+      v-for="(todoItem, index) in this.storedTodoItems"
       v-bind:key="todoItem.item"
       class="shadow"
     >
@@ -24,6 +24,9 @@
 </template>
 
 <script>
+// mapGetters 써보기
+import { mapGetters } from "vuex";
+
 export default {
   methods: {
     removeTodo(todoItem, index) {
@@ -35,6 +38,11 @@ export default {
       // this.$emit("toogleItem", todoItem, index);
       this.$store.commit("toogleOneItem", { todoItem, index });
     },
+  },
+  computed: {
+    // todoItems() {
+    // return this.$store.getters.storedTodoItems.
+    ...mapGetters(["storedTodoItems"]), // ...mapGetters({todoItems: "storedTodoItems"}),도 가능
   },
 };
 </script>

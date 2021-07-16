@@ -25,13 +25,15 @@
 
 <script>
 export default {
-  props: ["propsdata"],
   methods: {
     removeTodo(todoItem, index) {
-      this.$emit("removeItem", todoItem, index);
+      // this.$emit("removeItem", todoItem, index);
+      // ⭐️인자를 3개 이상 넘겨주면 불편하기 때문에 객체화를 시키고 거기다가 향상된 객체 리터럴 문법을 활용해서 인자로 넘겨줌 ==> const obj = {todoItem, index}를 그냥 인자로 넘겨줄 때에는 {todoItem, index}로!
+      this.$store.commit("removeOneItem", { todoItem, index });
     },
     toogleComplete(todoItem, index) {
-      this.$emit("toogleItem", todoItem, index);
+      // this.$emit("toogleItem", todoItem, index);
+      this.$store.commit("toogleOneItem", { todoItem, index });
     },
   },
 };

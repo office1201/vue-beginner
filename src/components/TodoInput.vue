@@ -37,7 +37,8 @@ export default {
       e.preventDefault();
       if (this.newTodoItem !== "") {
         // this.$emit("이벤트 이름", 인자1, 인자2, ...)
-        this.$emit("addTodoItem", this.newTodoItem);
+        // this.$emit("addTodoItem", this.newTodoItem);
+        this.$store.commit("addOneItem", this.newTodoItem); // const text = this.newTodoItem.trim()으로 text를 두 번째 인자로 줘도 가능
         this.clearInput();
       } else {
         this.showModal = !this.showModal;
